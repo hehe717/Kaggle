@@ -26,23 +26,6 @@ model = VisionTransformer(
     depth=16
 )
 
-# model = CCT(
-#     img_size = (224, 224),
-#     embedding_dim = 384,
-#     n_conv_layers = 2,
-#     kernel_size = 7,
-#     stride = 2,
-#     padding = 3,
-#     pooling_kernel_size = 3,
-#     pooling_stride = 2,
-#     pooling_padding = 1,
-#     num_layers = 14,
-#     num_heads = 6,
-#     mlp_ratio = 3.,
-#     num_classes = 4,
-#     positional_embedding = 'learnable', # ['sine', 'learnable', 'none']
-# )
-# model = se_resnext50_32x4d()
 # model = ResNeXt50(num_classes=4)
 
 # Training code
