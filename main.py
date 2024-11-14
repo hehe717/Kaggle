@@ -31,7 +31,7 @@ model = VisionTransformer(
 # Training code
 epochs = 100
 loss_fn = CrossEntropyLoss()
-optimizer = torch.optim.Adam(model.parameters(), lr=0.001)
+optimizer = torch.optim.Adam(model.parameters(), lr=0.0001)
 scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(optimizer, mode='min', factor=0.5, patience=3, verbose=True)
 
 if torch.cuda.is_available():

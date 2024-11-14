@@ -13,9 +13,9 @@ class PatchEmbedding(nn.Module):
         self.patch_norm = nn.LayerNorm(embed_dim)
 
     def forward(self, x):
-        x = self.proj(x) # (B, E, N, N) which B is batch size, E is embed dim, N is number of patches
-        x = x.flatten(2) # (B, E, N*N)
-        x = x.transpose(1, 2) # (B, N*N, E)
+        x = self.proj(x) # (B, E, n, n) which B is batch size, E is embed dim, n is number of patches in row or column
+        x = x.flatten(2) # (B, E, N)  where N equals number of patches
+        x = x.transpose(1, 2) # (B, N, E)
         x = self.patch_norm(x)
         return x
 
