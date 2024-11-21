@@ -9,13 +9,15 @@ class PatchEmbedding(nn.Module):
     def __init__(self, img_size, in_channels, embed_dim, patch_size):
         super(PatchEmbedding, self).__init__()
         self.num_patches = (img_size // patch_size) ** 2
-        self.proj = DepthwiseSeparableConv2d(in_channels=in_channels, out_channels=embed_dim, kernel_size=patch_size, stride=patch_size)
+        self.proj = nn.Conv2d(in_channels=in_channels, out_channels=embed_dim, kernel_size=patch_size, stride=patch_size)
+        self.position_embedding = nn.Parameter(torch.randn(1, self.num_patches, embed_dim))
         self.patch_norm = nn.LayerNorm(embed_dim)
 
     def forward(self, x):
         x = self.proj(x) # (B, E, n, n) which B is batch size, E is embed dim, n is number of patches in row or column
         x = x.flatten(2) # (B, E, N)  where N equals number of patches
         x = x.transpose(1, 2) # (B, N, E)
+        x = x + self.position_embedding
         x = self.patch_norm(x)
         return x
 
